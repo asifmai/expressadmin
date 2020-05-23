@@ -1,0 +1,1 @@
+All Client Side Images files for Admin goes here

@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    include partials/commonhead
+    block customhead
+  body
+    header
+      include partials/sidebar
+      include partials/navbar
+    main
+      .container-fluid
+        block content
+    include partials/footer
+    include partials/commonscripts
+    block customscripts
