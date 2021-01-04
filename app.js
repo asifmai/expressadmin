@@ -1,13 +1,13 @@
-require('dotenv').config()
+require('dotenv').config();
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const connectDb = require('./helpers/connectdb');
+const connectDb = require('./config/connectdb');
 const passport = require('passport');
 const session = require('express-session');
-const flash = require('connect-flash')
+const flash = require('connect-flash');
 
 // Connect to MongoDB
 connectDb();
@@ -16,7 +16,7 @@ connectDb();
 const app = express();
 
 // Passport Config
-require('./helpers/passport')(passport);
+require('./config/passport')(passport);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,11 +29,13 @@ app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
 
 // Express Session
-app.use(session({
-  secret: 'harisiqbal',
-  resave: true,
-  saveUninitialized: true
-}));
+app.use(
+  session({
+    secret: 'harisiqbal',
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 
 // Passport Middleware
 app.use(passport.initialize());
@@ -51,7 +53,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
-  res.locals.error = req.flash('error');            // Error from Passport
+  res.locals.error = req.flash('error'); // Error from Passport
   res.locals.user = req.user;
   next();
 });
@@ -60,12 +62,12 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/index'));
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

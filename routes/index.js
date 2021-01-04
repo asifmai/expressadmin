@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const indexController = require('../controllers/indexcontroller');
-const auth = require('../helpers/auth');
+const auth = require('../config/auth');
 
 /* GET users listing. */
 router.get('/', auth.ensureAuthenticatedAdmin, indexController.admin_get);
@@ -13,6 +13,10 @@ router.get('/login', indexController.login_get);
 router.post('/login', indexController.login_post);
 
 /* GET - Public - admin log out */
-router.get('/logout', auth.ensureAuthenticatedAdmin, indexController.logout_get);
+router.get(
+  '/logout',
+  auth.ensureAuthenticatedAdmin,
+  indexController.logout_get
+);
 
 module.exports = router;
