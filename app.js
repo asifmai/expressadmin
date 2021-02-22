@@ -8,6 +8,9 @@ const connectDb = require('./config/connectdb');
 const passport = require('passport');
 const session = require('express-session');
 const flash = require('connect-flash');
+const methodOverride = require('method-override');
+const fileUpload = require('express-fileupload');
+const cors = require('cors');
 
 // Connect to MongoDB
 connectDb();
@@ -45,9 +48,12 @@ app.use(passport.session());
 app.use(flash());
 
 // Other Middlewares
-app.use(express.json());
+app.use(express.json({ limit: '200mb' }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
+app.use(fileUpload());
+app.use(cors());
 
 // Global Variables
 app.use((req, res, next) => {

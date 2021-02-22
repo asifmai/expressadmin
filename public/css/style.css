@@ -1,3 +1,9 @@
+:root {
+  --themeColor: #2d323d;
+  --themeColorLight: #545a68;
+  --fontColor: #131310;
+}
+
 body {
   font-size: 1em;
   margin: 0;
@@ -57,7 +63,7 @@ body {
 
 #sidebar-wrapper {
   min-height: 100vh;
-  margin-left: -15rem;
+  margin-left: -15em;
   -webkit-transition: margin 0.25s ease-out;
   -moz-transition: margin 0.25s ease-out;
   -o-transition: margin 0.25s ease-out;
@@ -99,7 +105,6 @@ body {
     margin-left: -15rem;
   }
 }
-
 .parsley-errors-list {
   margin-bottom: 0;
   list-style: none;
@@ -114,19 +119,32 @@ body {
 }
 
 .bg-theme {
-  background-color: #2d323d;
+  background-color: var(--themeColor);
 }
 
 a.list-group-item:hover {
-  background-color: #545a68 !important;
+  background-color: var(--themeColorLight) !important;
 }
 
 .btn-theme {
-  background-color: #2d323d;
+  background-color: var(--themeColor);
   color: white;
 }
 
 .btn-theme:hover {
-  background-color: #545a68 !important;
+  background-color: var(--themeColorLight) !important;
+  color: white;
+}
+
+.btn-theme-secondary {
+  border: 1px solid var(--themeColor);
+  background-color: transparent;
+  color: var(--themeColor);
+}
+.dropdown-item.active {
+  background-color: var(--themeColorLight);
+}
+table thead th {
+  background-color: var(--themeColorLight);
   color: white;
 }
